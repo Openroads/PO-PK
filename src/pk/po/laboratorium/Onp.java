@@ -3,10 +3,14 @@ package pk.po.laboratorium;
 import java.util.ArrayList;
 
 public class Onp {
-
+/**
+ * 
+ * @param rownanie
+ * @return
+ */
 public  ArrayList<String> createOnpForm(String rownanie)
 	{
-		Stack stos = new Stack(rownanie.length());
+		Stack<String> stos = new Stack<String>();
 		char dana;
 		String liczba ="";
 		ArrayList<String> wynik = new ArrayList<String>();	
@@ -42,7 +46,7 @@ public  ArrayList<String> createOnpForm(String rownanie)
 				switch(dana)
 				{
 				case'(':	
-					stos.add(dana);
+					stos.add(String.valueOf(dana));
 					break;
 				case')':
 					while(stos.showTop().equals("(")==false)
@@ -50,6 +54,8 @@ public  ArrayList<String> createOnpForm(String rownanie)
 						wynik.add(stos.getTop());
 					}
 					stos.getTop();//sciagniecie nawiasu "("
+					break;
+				case' ': 
 					break;
 				case'+': 
 				case'*': 
@@ -65,7 +71,7 @@ public  ArrayList<String> createOnpForm(String rownanie)
 								}
 						wynik.add(stos.getTop());
 					}
-					stos.add(dana);
+					stos.add(String.valueOf(dana));
 					break;
 				default:
 					System.out.println("Nie poprawny znak w równaniu");
@@ -100,10 +106,14 @@ public  ArrayList<String> createOnpForm(String rownanie)
 			
 		}return 0;
 	}
-	
+	/**
+	 * 
+	 * @param rownanie
+	 * @return
+	 */
 	public  double getResult(ArrayList<String> rownanie)
 	{
-		Stack stos = new Stack(rownanie.size());
+		Stack<String> stos = new Stack<String>();
 		double temporary,temporary2;
 		for(String dana : rownanie)
 		{
@@ -112,39 +122,39 @@ public  ArrayList<String> createOnpForm(String rownanie)
 			case"+":
 				temporary = Double.parseDouble(stos.getTop());
 				temporary2 = temporary+Double.parseDouble(stos.getTop());
-				stos.add(temporary2);
+				stos.add(String.valueOf(temporary2));
 				break;
 			case"-":
 				temporary = Double.parseDouble(stos.getTop());
 				temporary2 = Double.parseDouble(stos.getTop())-temporary;
-				stos.add(temporary2);
+				stos.add(String.valueOf(temporary2));
 				break;
 			case"*":
 			case"x":
 				temporary = Double.parseDouble(stos.getTop());
 				temporary2 = temporary*Double.parseDouble(stos.getTop());
-				stos.add(temporary2);
+				stos.add(String.valueOf(temporary2));
 				break;
 			case"/":
 				temporary = Double.parseDouble(stos.getTop());
 				temporary2 = Double.parseDouble(stos.getTop())/temporary;
-				stos.add(temporary2);
+				stos.add(String.valueOf(temporary2));
 				break;
 			case"%":
 				temporary = Double.parseDouble(stos.getTop());
 				temporary2 = temporary%Double.parseDouble(stos.getTop());
-				stos.add(temporary2);
+				stos.add(String.valueOf(temporary2));
 				break;
 			case"^":
 				temporary = Double.parseDouble(stos.getTop());
 				temporary2 = Math.pow(Double.parseDouble(stos.getTop()),temporary);
-				stos.add(temporary2);
+				stos.add(String.valueOf(temporary2));
 				break;
 			case"v":
 			case"V":
 				temporary = Double.parseDouble(stos.getTop());
 				temporary2 = sqrt(temporary,Double.parseDouble(stos.getTop()));
-				stos.add(temporary2);
+				stos.add(String.valueOf(temporary2));
 				break;
 				
 			default:
@@ -157,6 +167,12 @@ public  ArrayList<String> createOnpForm(String rownanie)
 		
 		return wynik;
 	}
+	/**
+	 * 
+	 * @param grade
+	 * @param number
+	 * @return
+	 */
 	public static double sqrt(double grade, double number)
 	{
 		return Math.pow(number, (double)1/grade);

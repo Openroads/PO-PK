@@ -1,66 +1,45 @@
 package pk.po.laboratorium;
 
-public class Stack {
+import java.util.LinkedList;
+
+public class Stack <T> {
 	
-	String tablica[];
-	int stackPointer=-1;
-	int wielkosc;
+	LinkedList<T> tablica;
+	
 	/**
 	 * 
 	 * @param length dlugosc tablicy
 	 */
-	public Stack(int length)
+	public Stack()
 	{
-		wielkosc=length;
-		tablica = new String[length];
+		tablica = new LinkedList<T>();
 	}
-	public void add(String znak)
+	public void add(T znak)
 	{
-		if(stackPointer<wielkosc){
-		tablica[++stackPointer]=znak;
-		}else{System.out.println("Stos przepełniony");}
-	}
-	public void add(char znak)
-	{
-		if(stackPointer<wielkosc){
-		tablica[++stackPointer]=String.valueOf(znak);
-		}
-		else{System.out.println("Stos przepełniony");}
+		tablica.addLast(znak);
 	}
 	
-	public void add(double liczba)
+	
+	public T showTop()
 	{
-		if(stackPointer<wielkosc){
-			tablica[++stackPointer]=String.valueOf(liczba);
-		}else{System.out.println("Stos przepełniony");}
-		
+		return tablica.getLast();
 	}
 	
-	public String showTop()
+	public T getTop()
 	{
-		if(stackPointer>=0)
-		return tablica[stackPointer];
-		else{
-			System.out.println("Stos pusty");
-			return "-1";}
-	}
-	
-	public String getTop()
-	{
-		if(stackPointer>=0)
-		return tablica[stackPointer--];
-		return "-1";
+		if(!tablica.isEmpty())
+		return tablica.removeLast();
+		else return null;
 	}
 	public boolean isEmpty()
 	{
-		if(stackPointer>=0)
-		return false;
-		else return true;
+		return tablica.isEmpty();
 	}
 	public void showStack()
 	{
-		for(int i=0;i<=stackPointer;i++){
-			System.out.print(tablica[i]);
+		for(T t : tablica)
+		{
+			System.out.println(t);
 		}
 	}
 

@@ -14,6 +14,9 @@ public class TestClass {
 		{
 			System.out.println("Rownanie wejsciowe: "+args[ile]);
 			rown=args[ile];
+			System.out.println(rown);
+			rown=rown.replaceAll("\\s","");
+			System.out.println(rown);
 			ArrayList<String> rownanieOnp = kalkulator.createOnpForm(rown);
 			System.out.print("Rownanie onp: ");
 			for(String s : rownanieOnp)
